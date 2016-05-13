@@ -1,30 +1,16 @@
 
 def calculate_margin(prices):
 
-	min = None
-	max = None
 	best_margin = None
 
-	for price in prices:
-		if not min:
-			min = price
-			continue
+	for idx, price in enumerate(prices):
+		for next_price in prices[1 + idx:]:
+			margin = next_price - price
 
-		if price < min:
-			min = price
-
-		if not max:
-			max = price
-			continue
-
-		if price > max:
-			max = price
-
-		margin = max - min
-
-		if not best_margin or margin > best_margin:
-			best_margin = margin
-			min = None
-			max = None
+			if not best_margin:
+				best_margin = margin
+			else:
+				if margin > best_margin:
+					best_margin = margin
 
 	return best_margin
