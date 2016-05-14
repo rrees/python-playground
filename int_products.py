@@ -8,6 +8,35 @@ def calculate(ints):
 	if len(ints) == 2:
 		return [ints[1], ints[0]]
 
+	products = [None] * len(ints)
+	left = 1
+	right = 1
+
+	for i in range(len(ints) - 1, -1, -1):
+		right = right
+		products[i] = right
+		right = right * ints[i]
+
+	print(products)
+
+	for i in range(len(ints)):
+		print(i)
+		products[i] = left * products[i]
+		left = left * ints[i]
+
+
+
+	print(products)
+	return products
+
+def calculate_precalculate_right(ints):
+
+	if len(ints) == 1:
+		return ints
+
+	if len(ints) == 2:
+		return [ints[1], ints[0]]
+
 	left = 1
 	rights = [1]
 
