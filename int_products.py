@@ -17,16 +17,10 @@ def calculate(ints):
 		products[i] = right
 		right = right * ints[i]
 
-	print(products)
-
 	for i in range(len(ints)):
-		print(i)
 		products[i] = left * products[i]
 		left = left * ints[i]
 
-
-
-	print(products)
 	return products
 
 def calculate_precalculate_right(ints):
