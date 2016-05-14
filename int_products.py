@@ -2,6 +2,11 @@ import functools
 
 def calculate(ints):
 
+	if len(ints) == 1:
+		return ints
+
+	if len(ints) == 2:
+		return [ints[1], ints[0]]
 
 	left = 1
 	rights = [1]
