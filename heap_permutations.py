@@ -6,6 +6,7 @@ def swap(i, j, array):
 	return array
 
 def permutations(array, n = None, results = None):
+	print(array, n, results)
 
 	if not n:
 		n = len(array)
@@ -14,13 +15,13 @@ def permutations(array, n = None, results = None):
 		results = []
 
 	if n == 1:
-		if not results:
-			return array
-		else:
-			return results
+		print(array, results)
+		results.append(array.copy())
+		print(array, results)
+		return results
 
 	for i in range(n):
-		results.extend(permutations(array, n -1, results))
+		results = permutations(array, n - 1, results)
 		if n % 2 == 0:
 			swap(i, -1, array)
 		else:
