@@ -6,8 +6,9 @@ def swap(i, j, array):
 	array[j] = item
 	return array
 
-def permutations(array, n = None, results = None):
 
+def permutations(array, n = None, results = None):
+	""" Implementation of Heap's permutations algorithim: https://en.wikipedia.org/wiki/Heap%27s_algorithm """
 	if not n:
 		n = len(array)
 
