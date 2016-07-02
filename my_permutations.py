@@ -1,6 +1,6 @@
 
 def subsets(a_set, subset_size, depth = 0, all_subsets = None, current_sub_set=None):
-	print(a_set, subset_size, depth, all_subsets, current_sub_set)
+	#print(a_set, subset_size, depth, all_subsets, current_sub_set)
 	if current_sub_set == None:
 		current_sub_set = []
 
@@ -24,6 +24,6 @@ def subsets(a_set, subset_size, depth = 0, all_subsets = None, current_sub_set=N
 		return a_set[0:idx] + a_set[idx+1: len(a_set)]
 
 	for i in range(len(a_set)):
-		subsets(next_set(a_set,i), subset_size, depth = depth + 1, all_subsets = all_subsets, current_sub_set = current_sub_set.copy() + a_set[i:i+1])
+		subsets(next_set(a_set,i), subset_size, depth = depth + 1, all_subsets = all_subsets, current_sub_set = current_sub_set + a_set[i:i+1])
 
 	return all_subsets
