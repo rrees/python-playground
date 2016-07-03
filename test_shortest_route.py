@@ -8,12 +8,12 @@ class TestShortestRoute(unittest.TestCase):
 		edges = {
 			(0, 1): 5,
 			(0, 2): 3,
-			(0, 4): 1,
+			(0, 4): 2,
 			(1, 3): 2,
 			(2, 1): 1,
 			(2, 3): 1,
 			(3, 0): 1,
-			(3, 7): 1,
+			(3, 6): 2,
 			(4, 0): 1,
 			(4, 8): 7,
 			(5, 1): 3,
@@ -28,3 +28,5 @@ class TestShortestRoute(unittest.TestCase):
 		path, distance = graphs.shortest_route(0, 8, 9, edges)
 
 		self.assertEqual(distance, 8)
+
+		self.assertEqual(path, [0, 2, 3, 6, 8])
