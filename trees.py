@@ -21,7 +21,6 @@ def bfs_content(tree, unvisited=None, tree_content=None):
 		unvisited = [tree]
 
 	if len(unvisited) == 0:
-		print(unvisited)
 		return tree_content
 
 	current_node = unvisited[0]	
