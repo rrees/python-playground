@@ -5,15 +5,13 @@ Cost = namedtuple('Cost', ['vertex', 'link', 'weight'])
 def prim_mst(edges, adjacency, n, s):
     def recalculate_costs(route_costs, visited, unvisited):                
         for i in range(len(route_costs)):
-            cost = route_costs[i]
-            #print("Calculating cost", cost, route_costs)
-            
-            for node in adjacency[cost.vertex]:
-                if (node, cost.vertex) in edges:
-                    this_route_weight = edges[node, cost.vertex]
+            for node in adjacency[i+1]:
+                cost = route_costs[i]
 
-                    if this_route_weight <= cost.weight:
-                        route_costs[i] = Cost(cost.vertex, node, this_route_weight)
+                this_route_weight = edges[node, cost.vertex]
+
+                if this_route_weight <= cost.weight:
+                    route_costs[i] = Cost(cost.vertex, node, this_route_weight)
         
         return route_costs   
             
@@ -36,20 +34,11 @@ def prim_mst(edges, adjacency, n, s):
         
         #print(unvisited, visited, routes, route_costs)
         
-        adjacent_nodes = set()
-        
-        for node in visited:
-            for adjacent_node in adjacency[node]:
-                if adjacent_node in unvisited:
-                    adjacent_nodes.add(adjacent_node)
-        
-        #print(adjacent_nodes)
-        
         next_route = None
         
         min_weight = initial_weight
         next_route = None
-        for node in adjacent_nodes:
+        for node in unvisited:
             route = route_costs[node-1]
             if route.weight <= min_weight:
                 min_weight = route.weight
