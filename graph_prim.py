@@ -6,6 +6,8 @@ def prim_mst(edges, adjacency, n, s):
     def recalculate_costs(route_costs, visited, unvisited):                
         for i in range(len(route_costs)):
             for node in adjacency[i+1]:
+                if node in unvisited:
+                    continue
                 cost = route_costs[i]
 
                 this_route_weight = edges[node, cost.vertex]
