@@ -29,12 +29,13 @@ def prim_mst(edges, adjacency, n, s):
     
     #print("Initial costs", route_costs)
 
-    for node in adjacency[s]:
-        route_costs[node - 1] = Cost(node, s, edges[node, s])
-    
     while unvisited:        
         
         #print(unvisited, visited, routes, route_costs)
+        
+        recalculate_costs(route_costs, visited, unvisited)
+        
+        #print(route_costs)
         
         next_route = None
         
@@ -56,16 +57,7 @@ def prim_mst(edges, adjacency, n, s):
             if node in unvisited:
                 unvisited.remove(node)
         
-        #print(unvisited, visited, routes, next_routes)
-        
-        recalculate_costs(route_costs, visited, unvisited)
-        
-        #print(route_costs)
-                
-                    
-            
-                    
-        #print(unvisited, visited, routes, next_routes)
+        #print(unvisited, visited, routes, route_costs)
     
     return sum([c.weight for c in routes])    
     
