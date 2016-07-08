@@ -7,10 +7,8 @@ def prim_mst(edges, adjacency, n, s):
         for i in range(len(route_costs)):
             cost = route_costs[i]
             #print("Calculating cost", cost, route_costs)
-            if cost.vertex in visited:
-                continue
             
-            for node in visited:
+            for node in adjacency[cost.vertex]:
                 if (node, cost.vertex) in edges:
                     this_route_weight = edges[node, cost.vertex]
 
@@ -30,11 +28,9 @@ def prim_mst(edges, adjacency, n, s):
     route_costs = [Cost(i, None, initial_weight) for i in range(1, 1 + n)]
     
     #print("Initial costs", route_costs)
-    
-    for i in range(len(route_costs)):
-        cost = route_costs[i]
-        if (cost.vertex, s) in edges:
-            route_costs[i] = Cost(cost.vertex, s, edges[cost.vertex, s])
+
+    for node in adjacency[s]:
+        route_costs[node - 1] = Cost(node, s, edges[node, s])
     
     while unvisited:        
         
