@@ -1,5 +1,7 @@
 import sys
 
+from itertools import islice
+
 principle = float(sys.argv[1])
 
 interest_rate = float(sys.argv[2])
@@ -18,26 +20,28 @@ daily_interest, adjusted_daily_interest = (
     calculate_daily_interest(principle + adjustment, interest_rate),
 )
 
+
+def interest_projection(principle, rate):
+    total = principle
+    while True:
+        daily_interest = calculate_daily_interest(total, rate)
+        total = total + daily_interest
+        yield (total, daily_interest)
+
+
 print(
     f"Principle: {principle}; base daily interest {daily_interest:.2f}, adjusted daily interest {adjusted_daily_interest:.2f}"
 )
 
-i = 10
-current_balance = principle
+base_projection = interest_projection(principle, interest_rate)
+adjusted_projection = interest_projection(principle + adjustment, interest_rate)
 
-while i > 0:
-    daily_interest = calculate_daily_interest(current_balance, interest_rate)
+days = 10
+
+for current_balance, daily_interest in islice(base_projection, 10):
     print(f"Balance: {current_balance:.2f}, daily interest {daily_interest:.2f}")
-    current_balance = current_balance + daily_interest
-    i = i - 1
 
 print()
 
-i = 10
-current_balance = principle + adjustment
-
-while i > 0:
-    daily_interest = calculate_daily_interest(current_balance, interest_rate)
+for current_balance, daily_interest in islice(adjusted_projection, 10):
     print(f"Balance: {current_balance:.2f}, daily interest {daily_interest:.2f}")
-    current_balance = current_balance + daily_interest
-    i = i - 1
