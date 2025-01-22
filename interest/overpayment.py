@@ -2,6 +2,11 @@ import sys
 
 from itertools import islice
 
+if len(sys.argv) != 4:
+    print("python compound.py <principle> <rate> <amount added or removed (-)>")
+    exit(1)
+
+
 principle = float(sys.argv[1])
 
 interest_rate = float(sys.argv[2])

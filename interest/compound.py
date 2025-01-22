@@ -1,5 +1,9 @@
 import sys
 
+if len(sys.argv) != 4:
+    print("python compound.py <principle> <rate> <days>")
+    exit(1)
+
 principle = float(sys.argv[1])
 
 interest_rate = float(sys.argv[2])
