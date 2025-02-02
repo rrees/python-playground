@@ -108,15 +108,7 @@ def load_feed(url):
                 return None
 
             # Load the feed
-            feed_response = client.get(feed_url, headers=headers)
-            feed_response.raise_for_status()
-            feed_content = feed_response.text
-
-            if not is_rss_feed(feed_content):
-                return None
-
-            items = extract_feed_items(feed_content, feed_url)
-            return items
+            return load_feed(feed_url)
 
     except httpx.RequestError as e:
         raise ConnectionError(f"Failed to fetch URL: {str(e)}")

@@ -7,6 +7,10 @@ from markdownify import markdownify
 def convert_content(url):
     response = httpx.get(url)
 
+    if response.status_code != 200:
+        print(f"Received status code {response.status_code} for url: {url}")
+        return None
+
     page = response.raise_for_status().text
 
     parsed_content = BeautifulSoup(page, "html.parser")

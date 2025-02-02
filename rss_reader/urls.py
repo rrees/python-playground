@@ -5,3 +5,7 @@ def is_valid_url(url):
     """Check if the provided URL is valid."""
     result = urlparse(url)
     return all([result.scheme, result.netloc, result.hostname, result.path])
+
+
+def hostname(url):
+    return urlparse(url).hostname

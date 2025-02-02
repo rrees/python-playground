@@ -1,9 +1,11 @@
 import os
 import sys
 
+from pathlib import Path
+
 from content.convert_page import convert_content
 from feeds.rss import load_feed
-from urls import is_valid_url
+from urls import hostname, is_valid_url
 
 DEFAULT_URLS = [
     "https://www.goonhammer.com/",
@@ -13,7 +15,7 @@ urls_to_read = []
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        urls_to_read + DEFAULT_URLS
+        urls_to_read.extend(DEFAULT_URLS)
     else:
         url = sys.argv[1]
 
@@ -28,13 +30,23 @@ if __name__ == "__main__":
     os.makedirs("output", exist_ok=True)
 
     for url in urls_to_read:
+        site_name = hostname(url)
+        os.makedirs(os.path.join(output_directory_name, site_name), exist_ok=True)
+
+        print(f"Checking {site_name}")
+
         feed_results = load_feed(url)
 
         for item in feed_results:
             # print(item)
-            filename, content = convert_content(item["url"])
+            conversion_result = convert_content(item["url"])
 
-            output_path = os.path.join(output_directory_name, filename)
+            if not conversion_result:
+                continue
+
+            filename, content = conversion_result
+
+            output_path = Path(os.path.join(output_directory_name, site_name, filename))
 
             if not output_path.exists():
                 with open(output_path, "w") as output_file:
