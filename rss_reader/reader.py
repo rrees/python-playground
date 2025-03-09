@@ -10,6 +10,7 @@ from urls import hostname, is_valid_url
 DEFAULT_URLS = [
     "https://www.goonhammer.com/",
     "https://billmitchell.org/blog/",
+    "https://news.ansible.uk/rss.html",
 ]
 
 urls_to_read = []
